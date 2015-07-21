@@ -7,6 +7,8 @@ import flake8.main as flake8
 
 import pyres
 
+DEFAULT_CONFIG = {}
+
 q = pyres.ResQ()
 
 class PythonReviewJob(object):
@@ -15,10 +17,12 @@ class PythonReviewJob(object):
 
     @staticmethod
     def perform(filename, commit_sha, pull_request_number, patch, content, config):
-        opts = parse_config(config)
+        opts = {}
+        opts.update(DEFAULT_CONFIG)
+        opts.update(parse_config(config))
         violations = [
             {'line': error[0], 'message': error[3]}
-            for error in check_code(content, **opts)
+            for error in check_code(content, filename, **opts)
         ]
         payload = {
             'class': 'CompletedFileReviewJob',
@@ -40,9 +44,11 @@ def parse_config(config):
     except KeyError:
         return {}
 
-def check_code(code, **kwargs):
+def check_code(code, filename, **kwargs):
     flake8_style = flake8.get_style_guide(**kwargs)
     flake8_style.options.report = QuietReport(flake8_style.options)
+    if flake8_style.excluded(filename):
+        return []
     return flake8_style.input_file(None, lines=code.splitlines(True))
 
 class QuietReport(pep8.StandardReport):

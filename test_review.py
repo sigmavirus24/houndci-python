@@ -49,3 +49,22 @@ class TestReview:
             }],
         }
         mock_queue.push.assert_called_with('high', payload)
+
+    def test_unused_import_excluded(self, mock_queue):
+        config = '''
+        [flake8]
+        ignore=F401
+        exclude=test*
+        '''
+        tasks.PythonReviewJob.perform('test.py', '3e01a4', 3, 7, 'import this', config)
+        payload = {
+            'class': 'CompletedFileReviewJob',
+            'args': [{
+                'filename': 'test.py',
+                'commit_sha': '3e01a4',
+                'pull_request_number': 3,
+                'patch': 7,
+                'violations': [],
+            }],
+        }
+        mock_queue.push.assert_called_with('high', payload)
