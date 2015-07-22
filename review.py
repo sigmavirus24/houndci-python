@@ -6,7 +6,10 @@ import pyres
 import flake
 from settings import settings
 
-DEFAULT_CONFIG = {}
+# TODO(jmcarp) Revert exclude when stable
+DEFAULT_CONFIG = {
+    'exclude': '*',
+}
 
 q = pyres.ResQ(
     '{0}:{1}'.format(settings['host'], settings['port']),

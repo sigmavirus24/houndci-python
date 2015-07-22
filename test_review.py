@@ -3,18 +3,22 @@
 import mock
 import pytest
 
-import tasks
+import review
 
 @pytest.fixture
 def mock_queue(monkeypatch):
     q = mock.Mock()
-    monkeypatch.setattr(tasks, 'q', q)
+    monkeypatch.setattr(review, 'q', q)
     return q
 
 class TestReview:
 
     def test_unused_import(self, mock_queue):
-        tasks.PythonReviewJob.perform('test.py', '3e01a4', 3, 7, 'import this', '')
+        config = '''
+        [flake8]
+        exclude=
+        '''
+        review.PythonReviewJob.perform('test.py', '3e01a4', 3, 7, 'import this', config)
         violations = [
             {'line': 1, 'message': "'this' imported but unused"},
             {'line': 1, 'message': 'no newline at end of file'},
@@ -35,8 +39,9 @@ class TestReview:
         config = '''
         [flake8]
         ignore=F401
+        exclude=
         '''
-        tasks.PythonReviewJob.perform('test.py', '3e01a4', 3, 7, 'import this', config)
+        review.PythonReviewJob.perform('test.py', '3e01a4', 3, 7, 'import this', config)
         violations = [{'line': 1, 'message': 'no newline at end of file'}]
         payload = {
             'class': 'CompletedFileReviewJob',
@@ -56,7 +61,7 @@ class TestReview:
         ignore=F401
         exclude=test*
         '''
-        tasks.PythonReviewJob.perform('test.py', '3e01a4', 3, 7, 'import this', config)
+        review.PythonReviewJob.perform('test.py', '3e01a4', 3, 7, 'import this', config)
         payload = {
             'class': 'CompletedFileReviewJob',
             'args': [{
