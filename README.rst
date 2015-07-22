@@ -18,7 +18,7 @@ Run
 ===
 ::
 
-    PYTHONPATH=$(pwd):$PYTHONPATH pyres_worker python_review
+    PYTHONPATH=$(pwd):$PYTHONPATH ./worker.py python_review
 
 Test
 ====

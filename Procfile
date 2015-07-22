@@ -1,1 +1,1 @@
-resque: PYTHONPATH=$(pwd):$PYTHONPATH pyres_worker python_review
+resque: PYTHONPATH=$(pwd):$PYTHONPATH ./worker.py python_review
