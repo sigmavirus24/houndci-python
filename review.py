@@ -6,11 +6,6 @@ import pyres
 import flake
 from settings import settings
 
-# TODO(jmcarp) Revert exclude when stable
-DEFAULT_CONFIG = {
-    'exclude': '*',
-}
-
 q = pyres.ResQ(
     '{0}:{1}'.format(settings['host'], settings['port']),
     settings['password'],
@@ -23,7 +18,6 @@ class PythonReviewJob(object):
     @staticmethod
     def perform(filename, commit_sha, pull_request_number, patch, content, config):
         opts = {}
-        opts.update(DEFAULT_CONFIG)
         opts.update(flake.parse_config(config))
         violations = [
             {'line': error[0], 'message': error[3]}
