@@ -6,8 +6,7 @@ Python review service for Hound. Backed by [Flake8][].
 
 [Flake8]: http://flake8.readthedocs.org/en/latest/index.html
 
-Contributing
-------------
+## Contributing
 
 See the [CONTRIBUTING] document.
 Thank you, [contributors]!
@@ -18,16 +17,14 @@ We expect all contributors to follow thoughtbot's [code of conduct].
 [contributors]: https://github.com/thoughtbot/hound-python/graphs/contributors
 [code of conduct]: https://thoughtbot.com/open-source-code-of-conduct
 
-License
--------
+## License
 
 hound-python is Copyright (c) 2015 thoughtbot, inc. It is free software,
 and may be redistributed under the terms specified in the [LICENSE] file.
 
 [LICENSE]: /LICENSE
 
-About
------
+## About
 
 ![thoughtbot](https://thoughtbot.com/logo.png)
 
