@@ -18,7 +18,14 @@ class TestReview:
         [flake8]
         exclude=
         '''
-        review.PythonReviewJob.perform('test.py', '3e01a4', 3, 7, 'import this', config)
+        review.PythonReviewJob.perform({
+            'commit_sha': '3e01a4',
+            'config': config,
+            'content': 'import this',
+            'filename': 'test.py',
+            'patch': 7,
+            'pull_request_number': 3,
+        })
         violations = [
             {'line': 1, 'message': "'this' imported but unused"},
             {'line': 1, 'message': 'no newline at end of file'},
@@ -41,7 +48,14 @@ class TestReview:
         ignore=F401
         exclude=
         '''
-        review.PythonReviewJob.perform('test.py', '3e01a4', 3, 7, 'import this', config)
+        review.PythonReviewJob.perform({
+            'commit_sha': '3e01a4',
+            'config': config,
+            'content': 'import this',
+            'filename': 'test.py',
+            'patch': 7,
+            'pull_request_number': 3,
+        })
         violations = [{'line': 1, 'message': 'no newline at end of file'}]
         payload = {
             'class': 'CompletedFileReviewJob',
@@ -61,7 +75,14 @@ class TestReview:
         ignore=F401
         exclude=test*
         '''
-        review.PythonReviewJob.perform('test.py', '3e01a4', 3, 7, 'import this', config)
+        review.PythonReviewJob.perform({
+            'commit_sha': '3e01a4',
+            'config': config,
+            'content': 'import this',
+            'filename': 'test.py',
+            'patch': 7,
+            'pull_request_number': 3,
+        })
         payload = {
             'class': 'CompletedFileReviewJob',
             'args': [{
