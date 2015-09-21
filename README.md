@@ -22,7 +22,7 @@ We expect all contributors to follow thoughtbot's [code of conduct].
 hound-python is Copyright (c) 2015 thoughtbot, inc. It is free software,
 and may be redistributed under the terms specified in the [LICENSE] file.
 
-[LICENSE]: /LICENSE
+[LICENSE]: LICENSE
 
 ## About
 
