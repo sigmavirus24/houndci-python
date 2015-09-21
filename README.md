@@ -2,7 +2,7 @@
 
 [![Build Status](https://circleci.com/gh/thoughtbot/hound-python/tree/master.svg?style=svg)](https://circleci.com/gh/thoughtbot/hound-python/tree/master)
 
-Python review service for Hound. Backed by [Flake8][].
+Python review service for Hound. Backed by [Flake8].
 
 [Flake8]: http://flake8.readthedocs.org/en/latest/index.html
 
